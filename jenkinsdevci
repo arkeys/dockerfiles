@@ -1,2 +1,16 @@
+#
+# docker build - < ./Dockerfile
 FROM ubuntu:trusty
+RUN apt-get update -y
 
+# Misc utils
+RUN apt-get install -y wget
+RUN apt-get install -y curl
+RUN apt-get install -y tree
+RUN apt-get install -y vim
+
+# Install Jenkins  - also creates jenkins user
+RUN wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
+RUN sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+RUN apt-get update
+RUN apt-get install -y jenkins
